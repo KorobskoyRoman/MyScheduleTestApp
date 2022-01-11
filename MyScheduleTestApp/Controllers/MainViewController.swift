@@ -10,15 +10,15 @@ import FSCalendar
 
 class MainViewController: UIViewController {
     
-    var calendarHeightConstrain: NSLayoutConstraint!
-    let idScheduleCell = "idScheduleCell"
+    private var calendarHeightConstrain: NSLayoutConstraint!
+    private let idScheduleCell = "idScheduleCell"
     private var calendar: FSCalendar = {
         let calendar = FSCalendar()
         calendar.translatesAutoresizingMaskIntoConstraints = false
         return calendar
     }()
     
-    let showHideCalendarButton: UIButton = {
+    private let showHideCalendarButton: UIButton = {
         let button = UIButton()
         button.setTitle("Открыть календарь", for: .normal)
         button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
@@ -28,7 +28,7 @@ class MainViewController: UIViewController {
         return button
     }()
     
-    let tableView: UITableView = {
+    private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -55,7 +55,7 @@ class MainViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
     }
     
-    @objc func addButtonTapped() {
+    @objc private func addButtonTapped() {
         
         let addSchedule = AddNewScheduleViewController()
         navigationController?.pushViewController(addSchedule, animated: true)
@@ -77,7 +77,7 @@ class MainViewController: UIViewController {
         showHideCalendarButton.addTarget(self, action: #selector(showHideCalendarButtonTapped), for: .touchUpInside)
     }
     
-    @objc func showHideCalendarButtonTapped() {
+    @objc private func showHideCalendarButtonTapped() {
         
         if calendar.scope == .week {
             calendar.setScope(.month, animated: true)

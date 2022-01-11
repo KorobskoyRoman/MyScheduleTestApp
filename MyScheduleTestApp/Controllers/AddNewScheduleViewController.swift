@@ -9,8 +9,8 @@ import UIKit
 
 class AddNewScheduleViewController: UITableViewController {
     
-    let idNewSchedule = "idNewSchedule"
-    let idNewScheduleHeader = "idNewScheduleHeader"
+    private let idNewSchedule = "idNewSchedule"
+    private let idNewScheduleHeader = "idNewScheduleHeader"
     
     let headerNameArray = ["НАЗВАНИЕ", "ДАТА И ВРЕМЯ НАЧАЛА", "ДАТА И ВРЕМЯ КОНЦА", "ОПИСАНИЕ"]
     let cellNameArray = [["Название"],
