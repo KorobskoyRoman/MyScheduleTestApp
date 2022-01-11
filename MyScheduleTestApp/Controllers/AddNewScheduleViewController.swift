@@ -13,6 +13,10 @@ class AddNewScheduleViewController: UITableViewController {
     let idNewScheduleHeader = "idNewScheduleHeader"
     
     let headerNameArray = ["НАЗВАНИЕ", "ДАТА И ВРЕМЯ НАЧАЛА", "ДАТА И ВРЕМЯ КОНЦА", "ОПИСАНИЕ"]
+    let cellNameArray = [["Название"],
+                         ["Число", "Время"],
+                         ["Число", "Время"],
+                         ["Описание"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +47,7 @@ class AddNewScheduleViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "idNewSchedule", for: indexPath) as! NewScheduleCell
-        cell.cellConfigure(indexPath: indexPath)
+        cell.cellScheduleConfigure(nameArray: cellNameArray, indexPath: indexPath)
         
         return cell
     }

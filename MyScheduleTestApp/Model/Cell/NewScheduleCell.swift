@@ -26,10 +26,7 @@ class NewScheduleCell: UITableViewCell {
         return label
     }()
     
-    let cellNameArray = [["Название"],
-                         ["Число", "Время"],
-                         ["Число", "Время"],
-                         ["Описание"]]
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -43,8 +40,8 @@ class NewScheduleCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func cellConfigure(indexPath: IndexPath) {
-        nameCellLabel.text = cellNameArray[indexPath.section][indexPath.row]
+    func cellScheduleConfigure(nameArray: [[String]] ,indexPath: IndexPath) {
+        nameCellLabel.text = nameArray[indexPath.section][indexPath.row]
     }
     
     func setConstraints() {

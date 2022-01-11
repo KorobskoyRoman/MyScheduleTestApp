@@ -48,6 +48,9 @@ class MainViewController: UIViewController {
     }
     
     private func setupNavBar() {
+        if #available(iOS 13.0, *) {
+            navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+        }
         navigationItem.title = "Расписание"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
     }
