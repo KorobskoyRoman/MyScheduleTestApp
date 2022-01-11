@@ -12,6 +12,8 @@ class AddNewScheduleViewController: UITableViewController {
     let idNewSchedule = "idNewSchedule"
     let idNewScheduleHeader = "idNewScheduleHeader"
     
+    let headerNameArray = ["НАЗВАНИЕ", "ДАТА И ВРЕМЯ НАЧАЛА", "ДАТА И ВРЕМЯ КОНЦА", "ОПИСАНИЕ"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,6 +23,7 @@ class AddNewScheduleViewController: UITableViewController {
         tableView.separatorStyle = .none
         tableView.register(NewScheduleCell.self, forCellReuseIdentifier: idNewSchedule)
         tableView.register(HeaderNewScheduleCell.self, forHeaderFooterViewReuseIdentifier: idNewScheduleHeader)
+        tableView.bounces = false
         title = "Добавление"
     }
     
@@ -41,7 +44,6 @@ class AddNewScheduleViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "idNewSchedule", for: indexPath) as! NewScheduleCell
         cell.cellConfigure(indexPath: indexPath)
-//        cell.textLabel?.text = "cell \(indexPath)"
         
         return cell
     }
@@ -52,12 +54,35 @@ class AddNewScheduleViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: idNewScheduleHeader) as! HeaderNewScheduleCell
-        header.headerConfigure(section: section)
+        header.headerConfigure(nameArray: headerNameArray, section: section)
         
         return header
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.cellForRow(at: indexPath) as! NewScheduleCell
+        switch indexPath {
+        case [0,0]: alertCell(label: cell.nameCellLabel, name: "Название", placeholder: "Введите название...")
+        case [1,0]: alertDate(label: cell.nameCellLabel) { date in
+            print(date)
+        }
+        case [1,1]: alertTime(label: cell.nameCellLabel) { date in
+            print(date)
+        }
+        case [2,0]: alertDate(label: cell.nameCellLabel) { date in
+            print(date)
+        }
+        case [2,1]: alertTime(label: cell.nameCellLabel) { date in
+            print(date)
+        }
+        case [3,0]: alertCell(label: cell.nameCellLabel, name: "Описание", placeholder: "Введите описание...")
+        default:
+            print("error")
+        }
     }
 }

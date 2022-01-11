@@ -19,6 +19,10 @@
 		9CF2EC3D278E04020033FD35 /* AddNewScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF2EC3C278E04020033FD35 /* AddNewScheduleViewController.swift */; };
 		9CF2EC3F278E08340033FD35 /* NewScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF2EC3E278E08340033FD35 /* NewScheduleCell.swift */; };
 		9CF2EC41278E0BB30033FD35 /* HeaderNewScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF2EC40278E0BB30033FD35 /* HeaderNewScheduleCell.swift */; };
+		9CF2EC43278E15D90033FD35 /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 9CF2EC42278E15D90033FD35 /* Readme.md */; };
+		9CF2EC46278E20360033FD35 /* AlertDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF2EC45278E20360033FD35 /* AlertDate.swift */; };
+		9CF2EC48278E285D0033FD35 /* AlertTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF2EC47278E285D0033FD35 /* AlertTime.swift */; };
+		9CF2EC4A278E29D90033FD35 /* AlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF2EC49278E29D90033FD35 /* AlertCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +41,10 @@
 		9CF2EC3C278E04020033FD35 /* AddNewScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewScheduleViewController.swift; sourceTree = "<group>"; };
 		9CF2EC3E278E08340033FD35 /* NewScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScheduleCell.swift; sourceTree = "<group>"; };
 		9CF2EC40278E0BB30033FD35 /* HeaderNewScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderNewScheduleCell.swift; sourceTree = "<group>"; };
+		9CF2EC42278E15D90033FD35 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		9CF2EC45278E20360033FD35 /* AlertDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDate.swift; sourceTree = "<group>"; };
+		9CF2EC47278E285D0033FD35 /* AlertTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTime.swift; sourceTree = "<group>"; };
+		9CF2EC49278E29D90033FD35 /* AlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCell.swift; sourceTree = "<group>"; };
 		EE4458C317F500445A1860B3 /* Pods-MyScheduleTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyScheduleTestApp.release.xcconfig"; path = "Target Support Files/Pods-MyScheduleTestApp/Pods-MyScheduleTestApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,6 +72,7 @@
 		9CF2EC09278DC0CC0033FD35 = {
 			isa = PBXGroup;
 			children = (
+				9CF2EC42278E15D90033FD35 /* Readme.md */,
 				9CF2EC14278DC0CC0033FD35 /* MyScheduleTestApp */,
 				9CF2EC13278DC0CC0033FD35 /* Products */,
 				7B1726793BE8B63A06DEF8A8 /* Pods */,
@@ -121,6 +130,7 @@
 		9CF2EC2F278DDC6E0033FD35 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9CF2EC44278E20250033FD35 /* Alert */,
 				9CF2EC30278DDC7C0033FD35 /* Cell */,
 			);
 			path = Model;
@@ -144,6 +154,16 @@
 				9CF2EC3A278DF9930033FD35 /* UILabel.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		9CF2EC44278E20250033FD35 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				9CF2EC45278E20360033FD35 /* AlertDate.swift */,
+				9CF2EC47278E285D0033FD35 /* AlertTime.swift */,
+				9CF2EC49278E29D90033FD35 /* AlertCell.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		C0E3789F51ED94D1E05B9CC6 /* Frameworks */ = {
@@ -216,6 +236,7 @@
 			files = (
 				9CF2EC22278DC0CE0033FD35 /* LaunchScreen.storyboard in Resources */,
 				9CF2EC1F278DC0CE0033FD35 /* Assets.xcassets in Resources */,
+				9CF2EC43278E15D90033FD35 /* Readme.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,8 +291,11 @@
 			files = (
 				9CF2EC1A278DC0CC0033FD35 /* MainViewController.swift in Sources */,
 				9CF2EC16278DC0CC0033FD35 /* AppDelegate.swift in Sources */,
+				9CF2EC48278E285D0033FD35 /* AlertTime.swift in Sources */,
 				9CF2EC39278DF3750033FD35 /* UIStackView.swift in Sources */,
 				9CF2EC41278E0BB30033FD35 /* HeaderNewScheduleCell.swift in Sources */,
+				9CF2EC46278E20360033FD35 /* AlertDate.swift in Sources */,
+				9CF2EC4A278E29D90033FD35 /* AlertCell.swift in Sources */,
 				9CF2EC32278DDC8E0033FD35 /* ScheduleCell.swift in Sources */,
 				9CF2EC3B278DF9930033FD35 /* UILabel.swift in Sources */,
 				9CF2EC3D278E04020033FD35 /* AddNewScheduleViewController.swift in Sources */,
