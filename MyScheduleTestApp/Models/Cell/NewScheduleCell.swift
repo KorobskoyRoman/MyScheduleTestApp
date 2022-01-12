@@ -26,8 +26,6 @@ class NewScheduleCell: UITableViewCell {
         return label
     }()
     
-    
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -44,7 +42,8 @@ class NewScheduleCell: UITableViewCell {
         nameCellLabel.text = nameArray[indexPath.section][indexPath.row]
     }
     
-    func setConstraints() {
+    private func setConstraints() {
+        
         self.addSubview(backgroundViewCell)
         NSLayoutConstraint.activate([
             backgroundViewCell.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),

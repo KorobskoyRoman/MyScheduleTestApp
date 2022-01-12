@@ -71,6 +71,27 @@ class MainViewController: UIViewController {
         navigationController?.pushViewController(addSchedule, animated: true)
     }
     
+    @objc private func editingModel(scheduleModel: ScheduleModel) {
+        
+        let addSchedule = AddNewScheduleViewController()
+        addSchedule.scheduleModel = scheduleModel
+        addSchedule.editModel = true
+        
+        let dateFormatterHrs = DateFormatter()
+        let dateFormatterDate = DateFormatter()
+        dateFormatterHrs.dateFormat = "HH:mm"
+        dateFormatterDate.dateFormat = "dd.MM.yyyy"
+        
+        addSchedule.cellNameArray = [[scheduleModel.scheduleName],
+                                     [dateFormatterDate.string(from: scheduleModel.scheduleStartDate!),
+                                      dateFormatterHrs.string(from: scheduleModel.scheduleStartTime!)],
+                                     [dateFormatterDate.string(from: scheduleModel.scheduleFinishDate!),
+                                      dateFormatterHrs.string(from: scheduleModel.scheduleFinishTime!)],
+                                     [scheduleModel.scheduleDescription]]
+        
+        navigationController?.pushViewController(addSchedule, animated: true)
+    }
+    
     private func setupCalendar() {
         calendar.scope = .week
 //        calendar.select(calendar.today)
@@ -121,6 +142,11 @@ class MainViewController: UIViewController {
             tableView.reloadData()
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = scheduleArray[indexPath.row]
+        editingModel(scheduleModel: model)
     }
 }
 

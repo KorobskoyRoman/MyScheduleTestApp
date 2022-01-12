@@ -26,4 +26,15 @@ class RealmManager {
             localRealm.delete(model)
         }
     }
+    
+    func updateScheduleModel(model: ScheduleModel, nameArray: [[String]], scheduleStartDate: Date?, scheduleStartTime: Date?, scheduleFinishDate: Date?, scheduleFinishTime: Date?) {
+        try! localRealm.write {
+            model.scheduleName = nameArray[0][0]
+            model.scheduleStartDate = scheduleStartDate
+            model.scheduleStartTime = scheduleStartTime
+            model.scheduleFinishDate = scheduleFinishDate
+            model.scheduleFinishTime = scheduleFinishTime
+            model.scheduleDescription = nameArray[3][0]
+        }
+    }
 }
