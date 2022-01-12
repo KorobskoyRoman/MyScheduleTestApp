@@ -35,30 +35,31 @@ class AddNewScheduleViewController: UITableViewController {
         tableView.register(NewScheduleCell.self, forCellReuseIdentifier: idNewSchedule)
         tableView.register(HeaderNewScheduleCell.self, forHeaderFooterViewReuseIdentifier: idNewScheduleHeader)
         tableView.bounces = false
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
         title = "Добавление"
         print(scheduleModel)
     }
     
-//    @objc private func saveButtonTapped() {
-//
-//        if cellNameArray[0] == ["Название"] ||
-//            cellNameArray[1] == ["\(scheduleModel.scheduleStartTime!)"] ||
-//            cellNameArray[2] == ["\(scheduleModel.scheduleFinishTime!)"]
-////            scheduleModel.scheduleStartDate == nil || scheduleModel.scheduleFinishDate == nil
-//            {
-//            alertOk(title: "Ошибка сохранения!", message: "Необходимо заполнить дату и название!")
-//        } else if editModel == false {
-//            setModel()
-//            RealmManager.shared.saveScheduleModel(model: scheduleModel)
-//            scheduleModel = ScheduleModel() //обновляем модель для изменения данных из БД в реальном времени
-//            alertOk(title: "Успешно сохранено", message: nil)
-//
-//            tableView.reloadRows(at: [[0,0], [1,0], [1,1], [2,0], [2,1], [3,0]], with: .fade)
+    @objc private func saveButtonTapped() {
+
+        if cellNameArray[0] == ["Название"] ||
+            cellNameArray[1] == ["\(scheduleModel.scheduleStartTime!)"] ||
+            cellNameArray[2] == ["\(scheduleModel.scheduleFinishTime!)"]
+//            scheduleModel.scheduleStartDate == nil || scheduleModel.scheduleFinishDate == nil
+            {
+            alertOk(title: "Ошибка сохранения!", message: "Необходимо заполнить дату и название!")
+        } else {
+            setModel()
+            RealmManager.shared.saveScheduleModel(model: scheduleModel)
+            scheduleModel = ScheduleModel() //обновляем модель для изменения данных из БД в реальном времени
+            alertOk(title: "Успешно сохранено", message: nil)
+
+            tableView.reloadRows(at: [[0,0], [1,0], [1,1], [2,0], [2,1], [3,0]], with: .fade)
+        }
 //        } else {
 //            RealmManager.shared.updateScheduleModel(model: scheduleModel, nameArray: cellNameArray, scheduleStartDate: scheduleStartDate, scheduleStartTime: scheduleStartTime, scheduleFinishDate: scheduleFinishDate, scheduleFinishTime: scheduleFinishTime)
 //        }
-//    }
+    }
     
     private func setModel() {
         
