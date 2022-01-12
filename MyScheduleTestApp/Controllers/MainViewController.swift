@@ -75,7 +75,6 @@ class MainViewController: UIViewController {
         
         let addSchedule = AddNewScheduleViewController()
         addSchedule.scheduleModel = scheduleModel
-        addSchedule.editModel = true
         
         let dateFormatterHrs = DateFormatter()
         let dateFormatterDate = DateFormatter()
