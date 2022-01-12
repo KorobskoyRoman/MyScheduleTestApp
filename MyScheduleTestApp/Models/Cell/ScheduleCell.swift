@@ -9,13 +9,13 @@ import UIKit
 
 class ScheduleCell: UITableViewCell {
     
-    let id = UILabel(text: "1.", font: UIFont(name: "Apple SD Gothic Neo Bold", size: 20), alignment: .left, adjustsFontSizeToFitWidth: true)
+    let id = UILabel(text: "", font: UIFont(name: "Apple SD Gothic Neo Bold", size: 20), alignment: .left, adjustsFontSizeToFitWidth: true)
     
-    let dateStart = UILabel(text: "12:00", font: UIFont(name: "Apple SD Gothic Neo Regular", size: 20), alignment: .left, adjustsFontSizeToFitWidth: true)
+    let dateStart = UILabel(text: "", font: UIFont(name: "Apple SD Gothic Neo Regular", size: 20), alignment: .left, adjustsFontSizeToFitWidth: true)
     
-    let dateFinish = UILabel(text: "13:00", font: UIFont(name: "Apple SD Gothic Neo Regular", size: 20), alignment: .left, adjustsFontSizeToFitWidth: true)
+    let dateFinish = UILabel(text: "", font: UIFont(name: "Apple SD Gothic Neo Regular", size: 20), alignment: .left, adjustsFontSizeToFitWidth: true)
     
-    let caseName = UILabel(text: "Купить цветы", font: UIFont(name: "Apple SD Gothic Neo Bold", size: 20), alignment: .left, adjustsFontSizeToFitWidth: false)
+    let caseName = UILabel(text: "", font: UIFont(name: "Apple SD Gothic Neo Bold", size: 20), alignment: .left, adjustsFontSizeToFitWidth: false)
     
     let dateStartLabel = UILabel(text: "с:", font: UIFont(name: "Apple SD Gothic Neo Regular", size: 18), alignment: .right, adjustsFontSizeToFitWidth: true)
     
@@ -23,7 +23,7 @@ class ScheduleCell: UITableViewCell {
 
     let caseDescription: UILabel = {
         let label = UILabel()
-        label.text = "купить цветы по дороге домой alakfadfkafk afkadfakd alkf ladfk aldkf alfalf ldkfak fald"
+        label.text = ""
         label.textColor = .black
         label.font = UIFont(name: "Apple SD Gothic Neo Regular", size: 14)
         label.textAlignment = .left
@@ -40,18 +40,25 @@ class ScheduleCell: UITableViewCell {
         self.selectionStyle = .none
         setConstraints()
     }
-    
-//    override func layoutSubviews() {
-//        setConstraints()
-//    }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func configureCell(model: ScheduleModel) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+
+        dateStart.text = dateFormatter.string(from: model.scheduleStartTime)
+        dateFinish.text = dateFormatter.string(from: model.scheduleFinishTime)
+        caseName.text = model.scheduleName
+        caseDescription.text = model.scheduleDescription
+    }
 
     private func setConstraints() {
         
-        let topStackView = UIStackView(arrangedSubviews: [id, caseName, dateStartLabel, dateStart, dateFinishLabel, dateFinish], axis: .horizontal, spacing: 10, distribution: .fillProportionally)
+        let topStackView = UIStackView(arrangedSubviews: [id, caseName, dateStartLabel, dateStart, dateFinishLabel, dateFinish], axis: .horizontal, spacing: 10, distribution: .fill)
         let botStackView = UIStackView(arrangedSubviews: [caseDescription], axis: .horizontal, spacing: 10, distribution: .fillEqually)
 
         self.addSubview(topStackView)
@@ -64,7 +71,7 @@ class ScheduleCell: UITableViewCell {
         self.addSubview(botStackView)
         NSLayoutConstraint.activate([
             botStackView.topAnchor.constraint(equalTo: topStackView.bottomAnchor, constant: frame.height / 2 - 10),
-            botStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
+            botStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             botStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5)
         ])
     }

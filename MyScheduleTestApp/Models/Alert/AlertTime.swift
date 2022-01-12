@@ -1,39 +1,34 @@
 //
-//  AlertDate.swift
+//  AlertTime.swift
 //  MyScheduleTestApp
 //
-//  Created by Roman Korobskoy on 11.01.2022.
+//  Created by Roman Korobskoy on 12.01.2022.
 //
 
 import UIKit
 
 extension UIViewController {
     
-    func alertDate(label: UILabel, completionHandler: @escaping (NSDate) -> Void) {
+    func alertTime(label: UILabel, completionHandler: @escaping (Date) -> Void) {
         
         let alert = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
         let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .date
+        datePicker.datePickerMode = .time
         if #available(iOS 13.4, *) {
             datePicker.preferredDatePickerStyle = .wheels
         }
+        datePicker.locale = NSLocale(localeIdentifier: "Ru_ru") as Locale
+        
         alert.view.addSubview(datePicker)
         let actionOk = UIAlertAction(title: "Ok", style: .default) { action in
+            
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd.MM.yyyy"
-            let dateString = dateFormatter.string(from: datePicker.date)
+            dateFormatter.dateFormat = "HH:mm"
+            let timeString = dateFormatter.string(from: datePicker.date)
+            let timeSchedule = datePicker.date
+            completionHandler(timeSchedule)
             
-            //получаем значение дня недели для будущих возможных доработок
-//            let calendar = Calendar.current
-//            let component = calendar.dateComponents([.weekday], from: datePicker.date)
-//
-//            guard let weekday = component.weekday else { return }
-//            let numberWeekday = weekday
-            //
-            let date = datePicker.date as NSDate
-            completionHandler(date)
-            
-            label.text = dateString
+            label.text = timeString
         }
         let actionCancel = UIAlertAction(title: "Отмена", style: .default, handler: nil)
         

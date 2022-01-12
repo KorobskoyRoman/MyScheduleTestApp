@@ -11,6 +11,7 @@ class AddNewScheduleViewController: UITableViewController {
     
     private let idNewSchedule = "idNewSchedule"
     private let idNewScheduleHeader = "idNewScheduleHeader"
+    private var scheduleModel = ScheduleModel()
     
     let headerNameArray = ["НАЗВАНИЕ", "ДАТА И ВРЕМЯ НАЧАЛА", "ДАТА И ВРЕМЯ КОНЦА", "ОПИСАНИЕ"]
     let cellNameArray = [["Название"],
@@ -28,7 +29,18 @@ class AddNewScheduleViewController: UITableViewController {
         tableView.register(NewScheduleCell.self, forCellReuseIdentifier: idNewSchedule)
         tableView.register(HeaderNewScheduleCell.self, forHeaderFooterViewReuseIdentifier: idNewScheduleHeader)
         tableView.bounces = false
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
         title = "Добавление"
+    }
+    
+    @objc private func saveButtonTapped() {
+        
+        RealmManager.shared.saveScheduleModel(model: scheduleModel)
+        scheduleModel = ScheduleModel() //обновляем модель для изменения данных из БД в реальном времени
+        alertOk(title: "Успешно сохранено")
+        tableView.reloadData()
+    
+        tableView.reloadRows(at: [[0,0], [1,0], [1,1], [2,0], [2,1], [3,0]], with: .fade)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -71,20 +83,30 @@ class AddNewScheduleViewController: UITableViewController {
         
         let cell = tableView.cellForRow(at: indexPath) as! NewScheduleCell
         switch indexPath {
-        case [0,0]: alertCell(label: cell.nameCellLabel, name: "Название", placeholder: "Введите название...")
-        case [1,0]: alertDate(label: cell.nameCellLabel) { date in
-            print(date)
+        case [0,0]:
+            alertCell(label: cell.nameCellLabel, name: "Название", placeholder: "Введите название...") { text in
+                self.scheduleModel.scheduleName = text
         }
-        case [1,1]: alertTime(label: cell.nameCellLabel) { date in
-            print(date)
+        case [1,0]:
+            alertDate(label: cell.nameCellLabel) { date in
+            self.scheduleModel.scheduleStartDate = date
         }
-        case [2,0]: alertDate(label: cell.nameCellLabel) { date in
-            print(date)
+        case [1,1]:
+            alertTime(label: cell.nameCellLabel) { time in
+            self.scheduleModel.scheduleStartTime = time
         }
-        case [2,1]: alertTime(label: cell.nameCellLabel) { date in
-            print(date)
+        case [2,0]:
+            alertDate(label: cell.nameCellLabel) { date in
+            self.scheduleModel.scheduleFinishDate = date
         }
-        case [3,0]: alertCell(label: cell.nameCellLabel, name: "Описание", placeholder: "Введите описание...")
+        case [2,1]:
+            alertTime(label: cell.nameCellLabel) { time in
+            self.scheduleModel.scheduleFinishTime = time
+        }
+        case [3,0]:
+            alertCell(label: cell.nameCellLabel, name: "Описание", placeholder: "Введите описание...") { text in
+                self.scheduleModel.scheduleDescription = text
+        }
         default:
             print("error")
         }

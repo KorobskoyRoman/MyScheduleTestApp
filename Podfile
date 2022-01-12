@@ -7,5 +7,6 @@ target 'MyScheduleTestApp' do
 
   # Pods for MyScheduleTestApp
 pod 'FSCalendar'
+pod 'RealmSwift'
 
 end

@@ -7,6 +7,7 @@
 
 import UIKit
 import FSCalendar
+import RealmSwift
 
 class MainViewController: UIViewController {
     
@@ -34,17 +35,20 @@ class MainViewController: UIViewController {
         
         return tableView
     }()
+    
+    let localRealm = try! Realm()
+    var scheduleArray: Results<ScheduleModel>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        scheduleOnDay(date: Date())
         setupNavBar()
         setupCalendar()
         setupButtonTarget()
         setupDelegate()
         setConstraints()
-        
     }
     
     private func setupNavBar() {
@@ -63,6 +67,8 @@ class MainViewController: UIViewController {
     
     private func setupCalendar() {
         calendar.scope = .week
+        calendar.select(calendar.today)
+        tableView.reloadData()
     }
     
     private func setupDelegate() {
@@ -87,6 +93,20 @@ class MainViewController: UIViewController {
             showHideCalendarButton.setTitle("Открыть календарь", for: .normal)
         }
     }
+    
+    private func scheduleOnDay(date: Date) {
+        
+        let dateStart = date
+        let dateEnd: Date = {
+            let components = DateComponents(day: 1, second: -1)
+            return Calendar.current.date(byAdding: components, to: dateStart)!
+        }()
+        
+        let predicate = NSPredicate(format: "scheduleStartDate BETWEEN %@", [dateStart, dateEnd])
+        
+        scheduleArray = localRealm.objects(ScheduleModel.self).filter(predicate).sorted(byKeyPath: "scheduleStartTime")
+        tableView.reloadData()
+    }
 }
 
 // MARK: - Extensions
@@ -96,17 +116,20 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return scheduleArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: idScheduleCell, for: indexPath) as! ScheduleCell
+        let model = scheduleArray[indexPath.row]
+        cell.configureCell(model: model)
+        cell.backgroundColor = #colorLiteral(red: 0.959415853, green: 0.9599340558, blue: 0.9751341939, alpha: 1)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 75
     }
 }
 
@@ -121,7 +144,7 @@ extension MainViewController: FSCalendarDataSource, FSCalendarDelegate {
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        print(date)
+        scheduleOnDay(date: date)
     }
 }
 

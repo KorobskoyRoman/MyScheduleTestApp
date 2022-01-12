@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		82E5258563CCCA17016B4DCA /* Pods_MyScheduleTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ABF46F4997BEE409953CAAD /* Pods_MyScheduleTestApp.framework */; };
+		9CC271D1278F1CB6001770BD /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC271D0278F1CB6001770BD /* ScheduleModel.swift */; };
+		9CC271D4278F1E90001770BD /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC271D3278F1E90001770BD /* RealmManager.swift */; };
+		9CC271D6278F2C04001770BD /* AlertOk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC271D5278F2C04001770BD /* AlertOk.swift */; };
 		9CF2EC16278DC0CC0033FD35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF2EC15278DC0CC0033FD35 /* AppDelegate.swift */; };
 		9CF2EC1A278DC0CC0033FD35 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF2EC19278DC0CC0033FD35 /* MainViewController.swift */; };
 		9CF2EC1F278DC0CE0033FD35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CF2EC1E278DC0CE0033FD35 /* Assets.xcassets */; };
@@ -28,6 +31,9 @@
 /* Begin PBXFileReference section */
 		07EC24D36D3A6078507FD2D5 /* Pods-MyScheduleTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyScheduleTestApp.debug.xcconfig"; path = "Target Support Files/Pods-MyScheduleTestApp/Pods-MyScheduleTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		9ABF46F4997BEE409953CAAD /* Pods_MyScheduleTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyScheduleTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CC271D0278F1CB6001770BD /* ScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
+		9CC271D3278F1E90001770BD /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		9CC271D5278F2C04001770BD /* AlertOk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertOk.swift; sourceTree = "<group>"; };
 		9CF2EC12278DC0CC0033FD35 /* MyScheduleTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyScheduleTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CF2EC15278DC0CC0033FD35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9CF2EC19278DC0CC0033FD35 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +75,22 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		9CC271CF278F1CA6001770BD /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				9CC271D0278F1CB6001770BD /* ScheduleModel.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		9CC271D2278F1E62001770BD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9CC271D3278F1E90001770BD /* RealmManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		9CF2EC09278DC0CC0033FD35 = {
 			isa = PBXGroup;
 			children = (
@@ -92,7 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				9CF2EC29278DC33D0033FD35 /* Support files */,
-				9CF2EC2F278DDC6E0033FD35 /* Model */,
+				9CF2EC2F278DDC6E0033FD35 /* Models */,
+				9CC271D2278F1E62001770BD /* Services */,
 				9CF2EC2C278DC3DC0033FD35 /* Views */,
 				9CF2EC2A278DC35F0033FD35 /* Controllers */,
 			);
@@ -127,13 +150,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		9CF2EC2F278DDC6E0033FD35 /* Model */ = {
+		9CF2EC2F278DDC6E0033FD35 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9CC271CF278F1CA6001770BD /* Realm */,
 				9CF2EC44278E20250033FD35 /* Alert */,
 				9CF2EC30278DDC7C0033FD35 /* Cell */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		9CF2EC30278DDC7C0033FD35 /* Cell */ = {
@@ -162,6 +186,7 @@
 				9CF2EC45278E20360033FD35 /* AlertDate.swift */,
 				9CF2EC47278E285D0033FD35 /* AlertTime.swift */,
 				9CF2EC49278E29D90033FD35 /* AlertCell.swift */,
+				9CC271D5278F2C04001770BD /* AlertOk.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -291,9 +316,12 @@
 			files = (
 				9CF2EC1A278DC0CC0033FD35 /* MainViewController.swift in Sources */,
 				9CF2EC16278DC0CC0033FD35 /* AppDelegate.swift in Sources */,
+				9CC271D1278F1CB6001770BD /* ScheduleModel.swift in Sources */,
 				9CF2EC48278E285D0033FD35 /* AlertTime.swift in Sources */,
 				9CF2EC39278DF3750033FD35 /* UIStackView.swift in Sources */,
+				9CC271D4278F1E90001770BD /* RealmManager.swift in Sources */,
 				9CF2EC41278E0BB30033FD35 /* HeaderNewScheduleCell.swift in Sources */,
+				9CC271D6278F2C04001770BD /* AlertOk.swift in Sources */,
 				9CF2EC46278E20360033FD35 /* AlertDate.swift in Sources */,
 				9CF2EC4A278E29D90033FD35 /* AlertCell.swift in Sources */,
 				9CF2EC32278DDC8E0033FD35 /* ScheduleCell.swift in Sources */,
