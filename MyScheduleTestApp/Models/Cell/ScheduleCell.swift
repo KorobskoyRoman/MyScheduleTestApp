@@ -49,9 +49,12 @@ class ScheduleCell: UITableViewCell {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
-
-        dateStart.text = dateFormatter.string(from: model.scheduleStartTime)
-        dateFinish.text = dateFormatter.string(from: model.scheduleFinishTime)
+        guard let startTime = model.scheduleStartTime,
+              let endTime = model.scheduleFinishTime
+        else { return }
+        
+        dateStart.text = dateFormatter.string(from: startTime)
+        dateFinish.text = dateFormatter.string(from: endTime)
         caseName.text = model.scheduleName
         caseDescription.text = model.scheduleDescription
     }

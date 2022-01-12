@@ -35,12 +35,15 @@ class AddNewScheduleViewController: UITableViewController {
     
     @objc private func saveButtonTapped() {
         
-        RealmManager.shared.saveScheduleModel(model: scheduleModel)
-        scheduleModel = ScheduleModel() //обновляем модель для изменения данных из БД в реальном времени
-        alertOk(title: "Успешно сохранено")
-        tableView.reloadData()
-    
-        tableView.reloadRows(at: [[0,0], [1,0], [1,1], [2,0], [2,1], [3,0]], with: .fade)
+        if scheduleModel.scheduleStartTime == nil || scheduleModel.scheduleFinishTime == nil || scheduleModel.scheduleName == "" || scheduleModel.scheduleStartDate == nil || scheduleModel.scheduleFinishDate == nil {
+            alertOk(title: "Ошибка сохранения!", message: "Необходимо заполнить дату и название!")
+        } else {
+            RealmManager.shared.saveScheduleModel(model: scheduleModel)
+            scheduleModel = ScheduleModel() //обновляем модель для изменения данных из БД в реальном времени
+            alertOk(title: "Успешно сохранено", message: nil)
+            
+            tableView.reloadRows(at: [[0,0], [1,0], [1,1], [2,0], [2,1], [3,0]], with: .fade)
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

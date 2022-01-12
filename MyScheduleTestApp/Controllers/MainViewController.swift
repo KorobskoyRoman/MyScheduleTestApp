@@ -39,15 +39,21 @@ class MainViewController: UIViewController {
     let localRealm = try! Realm()
     var scheduleArray: Results<ScheduleModel>!
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        scheduleOnDay(date: Date())
+        tableView.register(ScheduleCell.self, forCellReuseIdentifier: idScheduleCell)
+        scheduleOnDay(date: calendar.today!)
         setupNavBar()
         setupCalendar()
         setupButtonTarget()
-        setupDelegate()
+        setupDelegateDataSource()
         setConstraints()
     }
     
@@ -67,16 +73,15 @@ class MainViewController: UIViewController {
     
     private func setupCalendar() {
         calendar.scope = .week
-        calendar.select(calendar.today)
-        tableView.reloadData()
+//        calendar.select(calendar.today)
+//        tableView.reloadData()
     }
     
-    private func setupDelegate() {
+    private func setupDelegateDataSource() {
         calendar.delegate = self
         calendar.dataSource = self
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(ScheduleCell.self, forCellReuseIdentifier: idScheduleCell)
     }
     
     private func setupButtonTarget() {
@@ -106,6 +111,16 @@ class MainViewController: UIViewController {
         
         scheduleArray = localRealm.objects(ScheduleModel.self).filter(predicate).sorted(byKeyPath: "scheduleStartTime")
         tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let editingRow = scheduleArray[indexPath.row]
+        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { _, _, completionHandler in
+            RealmManager.shared.deleteScheduleModel(model: editingRow)
+            tableView.reloadData()
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
 
